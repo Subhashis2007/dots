@@ -1,0 +1,15 @@
+#!/bin/bash
+
+image_dir="$HOME/.config/hypr/Walls"
+image_files=("$image_dir"/*.{jpg,jpeg,png})
+num_images=${#image_files[@]}
+random_index=$((RANDOM % num_images))
+random_image="${image_files[random_index]}"
+
+if [[ $(pidof swaybg) ]]; then
+  pkill swaybg
+fi
+
+swaybg -m fill -i $random_image
+
+notify-send "Wallpaper has been changed successfully"
